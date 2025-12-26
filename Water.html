@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIPS Water Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #0a1628;
+            color: #f1f5f9;
+            overflow-x: hidden;
+        }
+
+        /* ============ NAVBAR STYLES ============ */
+        .navbar {
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            padding: 0 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        /* Logo */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .logo-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+            z-index: 1;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #06b6d4 0%, #60a5fa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #94a3b8;
+            font-weight: 500;
+            font-size: 15px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links li a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #06b6d4, #2563eb);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            color: #22d3ee;
+            background: rgba(6, 182, 212, 0.1);
+        }
+
+        .nav-links li a:hover::before {
+            width: 60%;
+        }
+
+        .nav-links li a.active {
+            color: #22d3ee;
+            background: rgba(6, 182, 212, 0.15);
+        }
+
+        .nav-links li a.active::before {
+            width: 60%;
+        }
+
+        /* Contact Button */
+        .contact-btn {
+            background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%) !important;
+            color: white !important;
+            padding: 12px 28px !important;
+            border-radius: 50px !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
+            transition: all 0.3s ease !important;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(6, 182, 212, 0.5);
+            background: linear-gradient(135deg, #0891b2 0%, #1d4ed8 100%) !important;
+        }
+
+        .contact-btn::before {
+            display: none !important;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
+            transition: background 0.3s ease;
+            z-index: 1001;
+        }
+
+        .hamburger:hover {
+            background: rgba(6, 182, 212, 0.1);
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: linear-gradient(90deg, #06b6d4, #2563eb);
+            border-radius: 3px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* ============ PAGE CONTENT STYLES ============ */
+        
+        /* Background Effects */
+        .bg-effects {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .grid-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+        }
+
+        .glow-1 {
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(6,182,212,0.15) 0%, transparent 70%);
+            filter: blur(60px);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .glow-2 {
+            position: absolute;
+            bottom: 20%;
+            right: 10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%);
+            filter: blur(60px);
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-30px, 30px); }
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 32px 80px;
+            z-index: 10;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(6,182,212,0.15);
+            border: 1px solid rgba(6,182,212,0.3);
+            border-radius: 100px;
+            margin-bottom: 32px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #22d3ee;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 7vw, 72px);
+            font-weight: 900;
+            color: white;
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #22d3ee, #60a5fa, #22d3ee);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 4s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero p {
+            font-size: clamp(16px, 2vw, 22px);
+            color: #94a3b8;
+            max-width: 750px;
+            margin: 0 auto 48px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 64px;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #06b6d4, #2563eb);
+            color: white;
+            box-shadow: 0 4px 20px rgba(6,182,212,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(6,182,212,0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid rgba(6,182,212,0.5);
+            color: #22d3ee;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(6,182,212,0.1);
+            border-color: #22d3ee;
+        }
+
+        .hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 32px;
+            opacity: 0.7;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+        }
+
+        /* Section */
+        section {
+            position: relative;
+            padding: 120px 32px;
+            z-index: 10;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            color: #22d3ee;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 24px;
+        }
+
+        .section-description {
+            font-size: 20px;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .highlight {
+            color: #f87171;
+        }
+
+        .highlight-success {
+            color: #4ade80;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: linear-gradient(to bottom, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.7));
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(6, 182, 212, 0.5);
+            box-shadow: 0 8px 32px rgba(6, 182, 212, 0.2);
+        }
+
+        .card-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .card-icon.danger {
+            background: rgba(239,68,68,0.15);
+            border: 1px solid rgba(239,68,68,0.3);
+        }
+
+        .card-icon.primary {
+            background: rgba(6,182,212,0.15);
+            border: 1px solid rgba(6,182,212,0.3);
+        }
+
+        .card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .card p {
+            color: #94a3b8;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .card-footer {
+            padding-top: 24px;
+            border-top: 1px solid rgba(71,85,105,0.5);
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 900;
+            color: #f87171;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        /* Alert Box */
+        .alert-box {
+            margin-top: 64px;
+            padding: 32px;
+            background: linear-gradient(90deg, rgba(239,68,68,0.05), rgba(239,68,68,0.15), rgba(239,68,68,0.05));
+            border: 1px solid rgba(239,68,68,0.3);
+            border-radius: 16px;
+            text-align: center;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .alert-box p {
+            font-size: 20px;
+            color: #cbd5e1;
+        }
+
+        /* Solutions List */
+        .solutions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .solution-card {
+            background: linear-gradient(to bottom, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.7));
+            border: 1px solid rgba(6,182,212,0.3);
+            border-radius: 16px;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(6, 182, 212, 0.2);
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .solution-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(6,182,212,0.2), rgba(37,99,235,0.2));
+            border: 1px solid rgba(6,182,212,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .solution-features {
+            list-style: none;
+        }
+
+        .solution-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        .checkmark {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(6,182,212,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Outcomes Grid */
+        .outcomes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            max-width: 1280px;
+            margin: 0 auto 64px;
+        }
+
+        .outcome-card {
+            background: linear-gradient(to bottom, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.7));
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .outcome-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(6, 182, 212, 0.5);
+        }
+
+        .outcome-value {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 900;
+            background: linear-gradient(90deg, #22d3ee, #4ade80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .outcome-label {
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .outcome-description {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        /* CTA Section */
+        .cta-box {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0891b2, #2563eb);
+            border-radius: 24px;
+            padding: 64px 32px;
+            text-align: center;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .cta-box h3 {
+            font-size: clamp(24px, 4vw, 40px);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .cta-box p {
+            font-size: 20px;
+            color: #e0f2fe;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            padding: 64px 32px;
+            border-top: 1px solid rgba(71,85,105,0.3);
+            background: linear-gradient(180deg, transparent, rgba(2,6,23,0.5));
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-column h4 {
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .footer-bottom {
+            padding-top: 32px;
+            border-top: 1px solid rgba(71,85,105,0.3);
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Icons SVG */
+        .icon {
+            width: 32px;
+            height: 32px;
+        }
+
+        .icon-sm {
+            width: 20px;
+            height: 20px;
+        }
+
+        .icon-lg {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .navbar-container {
+                height: 70px;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                max-width: 320px;
+                height: 100vh;
+                background: linear-gradient(180deg, #0a1628 0%, #1e293b 100%);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 100px 30px 40px;
+                gap: 8px;
+                box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5);
+                transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links li a {
+                display: block;
+                padding: 16px 20px;
+                font-size: 16px;
+                text-align: left;
+            }
+
+            .contact-btn {
+                margin-top: 20px;
+                text-align: center !important;
+            }
+
+            .solution-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .solution-icon {
+                margin: 0 auto;
+            }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/index.html" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    </svg>
+                </div>
+                <span class="logo-text">DIPS</span>
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/about.html">A propos</a></li>
+                <li><a href="#" class="active">Water</a></li>
+                <li><a href="/chema.html">Chimicals</a></li>
+                <li><a href="/dijital.html">Digital</a></li>
+                <li><a href="/acadym.html">Academy</a></li>
+                <li><a href="#" class="contact-btn">Contact</a></li>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Background Effects -->
+    <div class="bg-effects">
+        <div class="grid-pattern">
+            <svg width="100%" height="100%">
+                <defs>
+                    <pattern id="waterGrid" width="60" height="60" patternUnits="userSpaceOnUse">
+                        <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#0ea5e9" stroke-width="0.5"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#waterGrid)" />
+            </svg>
+        </div>
+        <div class="glow-1"></div>
+        <div class="glow-2"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">
+                <svg class="icon-sm" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                </svg>
+                Industrial Water Intelligence
+            </div>
+
+            <h1>
+                Desalination &<br>
+                <span class="gradient-text">Water Treatment</span><br>
+                <span style="font-size: clamp(24px, 4vw, 40px); color: #94a3b8; font-weight: 400;">Optimized by AI</span>
+            </h1>
+
+            <p>
+                Transform your water treatment operations with <strong style="color: #22d3ee;">Digital Twin technology</strong> and 
+                <strong style="color: #60a5fa;"> AI-powered optimization</strong>. Reduce energy costs, ensure quality, and maximize efficiency.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">
+                    Schedule Technical Consultation
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#" class="btn btn-secondary">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                    View Case Studies
+                </a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    ISO 9001 Certified
+                </div>
+                <div class="stat-item">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                    15+ Years Experience
+                </div>
+                <div class="stat-item">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                    </svg>
+                    50+ Plants Optimized
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem">
+        <div class="section-header">
+            <span class="section-label">The Challenge</span>
+            <h2 class="section-title">
+                Why Water Treatment <span class="highlight">Struggles</span>
+            </h2>
+            <p class="section-description">
+                Traditional water treatment facilities face mounting pressure from energy costs, quality requirements, and operational complexity.
+            </p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon danger">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="12" y1="18" x2="12" y2="12"/>
+                        <line x1="9" y1="15" x2="15" y2="15"/>
+                    </svg>
+                </div>
+                <h3>High Energy Costs</h3>
+                <p>Desalination and water treatment consume massive energy. Pumps, membranes, and thermal processes drive OPEX through the roof.</p>
+                <div class="card-footer">
+                    <span class="stat-value">40-60%</span>
+                    <span class="stat-label">of total OPEX is energy</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon danger">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                        <polyline points="7.5 4.21 12 6.81 16.5 4.21"/>
+                        <polyline points="7.5 19.79 7.5 14.6 3 12"/>
+                        <polyline points="21 12 16.5 14.6 16.5 19.79"/>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                        <line x1="12" y1="22.08" x2="12" y2="12"/>
+                    </svg>
+                </div>
+                <h3>Inconsistent Water Quality</h3>
+                <p>Fluctuating feedwater quality, membrane fouling, and scaling lead to unpredictable output quality and compliance risks.</p>
+                <div class="card-footer">
+                    <span class="stat-value">±15%</span>
+                    <span class="stat-label">typical quality variance</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon danger">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                </div>
+                <h3>Reactive Operations</h3>
+                <p>Operators struggle with manual adjustments. By the time issues are detected, damage is done and costs have escalated.</p>
+                <div class="card-footer">
+                    <span class="stat-value">3-5hrs</span>
+                    <span class="stat-label">average response delay</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert-box">
+            <p>
+                <span class="highlight" style="font-weight: 700;">Result:</span> Unoptimized plants waste up to 
+                <span class="highlight" style="font-weight: 700;"> $2M+ annually</span> in excess energy, chemicals, and maintenance.
+            </p>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" style="background: linear-gradient(180deg, transparent, rgba(8,145,178,0.05), transparent);">
+        <div class="section-header">
+            <span class="section-label">Our Approach</span>
+            <h2 class="section-title">
+                Intelligent <span style="color: #22d3ee;">Digitalization</span>
+            </h2>
+            <p class="section-description">
+                We combine deep process engineering expertise with cutting-edge AI to transform your water operations.
+            </p>
+        </div>
+
+        <div class="solutions-list">
+            <div class="solution-card">
+                <div class="solution-grid">
+                    <div class="solution-icon">
+                        <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2">
+                            <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
+                            <rect x="9" y="9" width="6" height="6"/>
+                            <line x1="9" y1="1" x2="9" y2="4"/>
+                            <line x1="15" y1="1" x2="15" y2="4"/>
+                            <line x1="9" y1="20" x2="9" y2="23"/>
+                            <line x1="15" y1="20" x2="15" y2="23"/>
+                            <line x1="20" y1="9" x2="23" y2="9"/>
+                            <line x1="20" y1="14" x2="23" y2="14"/>
+                            <line x1="1" y1="9" x2="4" y2="9"/>
+                            <line x1="1" y1="14" x2="4" y2="14"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Digital Twin Technology</h3>
+                        <p>High-fidelity simulation of your entire water treatment process. Test scenarios, predict outcomes, and optimize without risk.</p>
+                    </div>
+                    <ul class="solution-features">
+                        <li>
+                            <div class="checkmark">
+                                <svg style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            Real-time process mirroring
+                        </li>
+                        <li>
+                            <div class="checkmark">
+                                <svg style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            What-if scenario analysis
+                        </li>
+                        <li>
+                            <div class="checkmark">
+                                <svg style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            Predictive membrane lifecycle
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="solution-card">
+                <div class="solution-grid">
+                    <div class="solution-icon">
+                        <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2">
+                            <line x1="12" y1="20" x2="12" y2="10"/>
+                            <line x1="18" y1="20" x2="18" y2="4"/>
+                            <line x1="6" y1="20" x2="6" y2="16"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Process Optimization Engine</h3>
+                        <p>AI-driven recommendations for pump speeds, chemical dosing, and recovery rates based on real-time feedwater analysis.</p>
+                    </div>
+                    <ul class="solution-features">
+                        <li>
+                            <div class="checkmark">
+                                <svg style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            Dynamic setpoint optimization
+                        </li>
+                        <li>
+                            <div class="checkmark">
+                                <svg style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            Energy consumption minimization
+                        </li>
+                        <li>
+                            <div class="checkmark">
+                                <svg style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            Quality-constrained operations
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="solution-card">
+                <div class="solution-grid">
+                    <div class="solution-icon">
+                        <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Advanced Simulation & Modeling</h3>
+                        <p>Thermodynamic and kinetic models calibrated to your specific plant. Understand every variable affecting performance.</p>
+                    </div>
+                    <ul class="solution-features">
+                        <li>
+                            <div class="checkmark">
+                                <svg style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            Membrane fouling prediction
+                        </li>
+                        <li>
+                            <div class="checkmark">
+                                <svg style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            Chemical equilibrium modeling
+                        </li>
+                        <li>
+                            <div class="checkmark">
+                                <svg style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            Hydraulic optimization
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Outcomes Section -->
+    <section id="outcomes">
+        <div class="section-header">
+            <span class="section-label">Proven Results</span>
+            <h2 class="section-title">
+                Measurable <span class="highlight-success">OPEX Reduction</span>
+            </h2>
+            <p class="section-description">
+                Our clients achieve substantial operational savings while improving water quality and system reliability.
+            </p>
+        </div>
+
+        <div class="outcomes-grid">
+            <div class="outcome-card">
+                <div class="outcome-value">15-25%</div>
+                <div class="outcome-label">OPEX Reduction</div>
+                <div class="outcome-description">Through optimized energy consumption and chemical usage</div>
+            </div>
+
+            <div class="outcome-card">
+                <div class="outcome-value">99.2%</div>
+                <div class="outcome-label">Quality Consistency</div>
+                <div class="outcome-description">Tighter control loops ensure specification compliance</div>
+            </div>
+
+            <div class="outcome-card">
+                <div class="outcome-value">30%</div>
+                <div class="outcome-label">Extended Membrane Life</div>
+                <div class="outcome-description">Predictive maintenance and optimized cleaning cycles</div>
+            </div>
+
+            <div class="outcome-card">
+                <div class="outcome-value">24/7</div>
+                <div class="outcome-label">Autonomous Optimization</div>
+                <div class="outcome-description">Continuous process adjustment without operator intervention</div>
+            </div>
+        </div>
+
+        <div class="cards-grid" style="margin-bottom: 64px;">
+            <div class="card">
+                <div class="card-icon primary">
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor" style="color: #22d3ee;">
+                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                    </svg>
+                </div>
+                <h4 style="font-size: 20px; font-weight: 700; color: white; margin-bottom: 16px;">Seawater Desalination (SWRO)</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="display: flex; align-items: center; gap: 12px; color: #94a3b8; margin-bottom: 12px;">
+                        <svg style="width: 16px; height: 16px; color: #22d3ee;" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                        </svg>
+                        Reverse Osmosis optimization
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 12px; color: #94a3b8; margin-bottom: 12px;">
+                        <svg style="width: 16px; height: 16px; color: #22d3ee;" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                        </svg>
+                        Energy recovery systems
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 12px; color: #94a3b8;">
+                        <svg style="width: 16px; height: 16px; color: #22d3ee;" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                        </svg>
+                        Pre-treatment optimization
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-icon primary">
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor" style="color: #22d3ee;">
+                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                    </svg>
+                </div>
+                <h4 style="font-size: 20px; font-weight: 700; color: white; margin-bottom: 16px;">Industrial Water Treatment</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="display: flex; align-items: center; gap: 12px; color: #94a3b8; margin-bottom: 12px;">
+                        <svg style="width: 16px; height: 16px; color: #22d3ee;" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                        </svg>
+                        Boiler feedwater systems
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 12px; color: #94a3b8; margin-bottom: 12px;">
+                        <svg style="width: 16px; height: 16px; color: #22d3ee;" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                        </svg>
+                        Cooling tower management
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 12px; color: #94a3b8;">
+                        <svg style="width: 16px; height: 16px; color: #22d3ee;" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                        </svg>
+                        Wastewater treatment
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-icon primary">
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor" style="color: #22d3ee;">
+                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                    </svg>
+                </div>
+                <h4 style="font-size: 20px; font-weight: 700; color: white; margin-bottom: 16px;">Brackish Water Treatment</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="display: flex; align-items: center; gap: 12px; color: #94a3b8; margin-bottom: 12px;">
+                        <svg style="width: 16px; height: 16px; color: #22d3ee;" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                        </svg>
+                        BWRO systems
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 12px; color: #94a3b8; margin-bottom: 12px;">
+                        <svg style="width: 16px; height: 16px; color: #22d3ee;" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                        </svg>
+                        Ion exchange optimization
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 12px; color: #94a3b8;">
+                        <svg style="width: 16px; height: 16px; color: #22d3ee;" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                        </svg>
+                        EDR processes
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cta-box">
+            <h3>Calculate Your Savings</h3>
+            <p>Get a personalized assessment of potential OPEX reduction for your water treatment facility.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;">
+                <a href="#" class="btn" style="background: white; color: #0891b2;">
+                    Free ROI Assessment
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#" class="btn" style="background: transparent; border: 2px solid rgba(255,255,255,0.5); color: white;">
+                    Download Brochure
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-column" style="grid-column: span 2;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                        <div style="width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, #06b6d4, #2563eb); display: flex; align-items: center; justify-content: center;">
+                            <span style="color: white; font-weight: 700; font-size: 20px;">D</span>
+                        </div>
+                        <span style="font-size: 20px; font-weight: 700; color: white;">DIPS Water</span>
+                    </div>
+                    <p style="color: #64748b; max-width: 320px;">
+                        Digitalization, Innovation & Process Simulation for the water treatment industry.
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li>Desalination</li>
+                        <li>Industrial Water</li>
+                        <li>Wastewater</li>
+                        <li>Digital Twins</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>info@dips-ds.com</li>
+                        <li>+212 5XX XXX XXX</li>
+                        <li>Casablanca, Morocco</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2024 DIPS DATA SCIENCE & IA. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        const overlay = document.getElementById('overlay');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 992 && navLinks.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À propos - DIPS DATA SCIENCE & IA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-white: #ffffff;
+            --color-light-bg: #f8f9fa;
+            --color-gray-50: #fafbfc;
+            --color-gray-100: #f1f3f5;
+            --color-gray-200: #e9ecef;
+            --color-gray-300: #dee2e6;
+            --color-gray-400: #ced4da;
+            --color-gray-500: #adb5bd;
+            --color-gray-600: #6c757d;
+            --color-gray-700: #495057;
+            --color-gray-800: #343a40;
+            --color-gray-900: #212529;
+            --color-dark: #1a1d23;
+            --color-primary: #0052cc;
+            --color-primary-dark: #003d99;
+            --color-secondary: #ff6b35;
+            --color-accent: #00b4d8;
+            
+            --font-heading: 'Roboto', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+            
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.15);
+            
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-white);
+            color: var(--color-gray-900);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            padding: 0 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .logo-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+            z-index: 1;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #334155;
+            font-weight: 500;
+            font-size: 15px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .nav-links li a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            color: #1e3a8a;
+            background: rgba(59, 130, 246, 0.08);
+        }
+
+        .nav-links li a:hover::before {
+            width: 60%;
+        }
+
+        .nav-links li a.active {
+            color: #1e3a8a;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .nav-links li a.active::before {
+            width: 60%;
+        }
+
+        .contact-btn {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%) !important;
+            color: white !important;
+            padding: 12px 28px !important;
+            border-radius: 50px !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            transition: all 0.3s ease !important;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.5);
+            background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%) !important;
+        }
+
+        .contact-btn::before {
+            display: none !important;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
+            transition: background 0.3s ease;
+            z-index: 1001;
+        }
+
+        .hamburger:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+            border-radius: 3px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 85vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, 
+                var(--color-primary) 0%, 
+                var(--color-primary-dark) 100%);
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.03) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.03) 75%);
+            background-size: 60px 60px;
+            background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+            opacity: 0.3;
+        }
+        
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            color: var(--color-white);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-tag {
+            display: inline-block;
+            font-family: var(--font-heading);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-accent);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1.25rem;
+            border-radius: 30px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            font-weight: 300;
+            line-height: 1.6;
+            opacity: 0.95;
+            max-width: 700px;
+        }
+        
+        /* Section Styles */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            padding: 6rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+        
+        .section-tag {
+            display: inline-block;
+            font-family: var(--font-heading);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-primary);
+            background: var(--color-gray-100);
+            padding: 0.5rem 1.25rem;
+            border-radius: 30px;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--color-gray-900);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        .section-description {
+            font-size: 1.125rem;
+            color: var(--color-gray-600);
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Leadership Section */
+        .leadership {
+            background: var(--color-light-bg);
+        }
+        
+        .leadership-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .leader-image-wrapper {
+            position: relative;
+        }
+        
+        .leader-image-container {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            background: var(--color-white);
+        }
+        
+        .leader-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .leader-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-box {
+            background: var(--color-white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--color-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .leader-text {
+            padding: 2rem;
+            background: var(--color-white);
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .leader-quote {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            line-height: 1.4;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+            border-left: 4px solid var(--color-primary);
+        }
+        
+        .leader-bio {
+            font-size: 1.063rem;
+            color: var(--color-gray-700);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .leader-signature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-gray-200);
+        }
+        
+        .signature-line {
+            flex: 1;
+        }
+        
+        .signature-name {
+            font-family: var(--font-heading);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+        }
+        
+        .signature-title {
+            font-size: 0.938rem;
+            color: var(--color-gray-600);
+        }
+        
+        /* Industries Section */
+        .industries {
+            background: var(--color-white);
+        }
+        
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .industry-card {
+            background: var(--color-white);
+            border: 2px solid var(--color-gray-200);
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .industry-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .industry-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .industry-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .industry-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .industry-name {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-bottom: 1rem;
+        }
+        
+        .industry-description {
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            line-height: 1.7;
+        }
+        
+        /* Team Section */
+        .team {
+            background: var(--color-light-bg);
+        }
+        
+        .team-category {
+            margin-bottom: 4rem;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--color-gray-300);
+        }
+        
+        .category-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .category-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-gray-900);
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background: var(--color-white);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--color-gray-200);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-primary);
+        }
+        
+        .member-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-white);
+            border: 4px solid var(--color-white);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .member-name {
+            font-family: var(--font-heading);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin-bottom: 0.5rem;
+        }
+        
+        .member-role {
+            font-size: 0.938rem;
+            color: var(--color-gray-600);
+            line-height: 1.4;
+        }
+        
+        /* Roadmap Section */
+        .roadmap {
+            background: var(--color-white);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 3rem auto 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, 
+                var(--color-primary) 0%, 
+                var(--color-accent) 100%);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 4rem;
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+        
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-content {
+            flex: 1;
+            background: var(--color-white);
+            border: 2px solid var(--color-gray-200);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 0 2rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover .timeline-content {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+            transform: scale(1.02);
+        }
+        
+        .timeline-year {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .timeline-marker {
+            width: 24px;
+            height: 24px;
+            background: var(--color-white);
+            border: 4px solid var(--color-primary);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            top: 2rem;
+            transform: translateX(-50%);
+            z-index: 2;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover .timeline-marker {
+            transform: translateX(-50%) scale(1.5);
+            background: var(--color-primary);
+        }
+        
+        .timeline-content ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .timeline-content li {
+            padding-left: 2rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+            color: var(--color-gray-700);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .timeline-content li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        
+        /* Vision Statement */
+        .vision-banner {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .vision-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .vision-text {
+            position: relative;
+            z-index: 1;
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 700;
+            color: var(--color-white);
+            line-height: 1.4;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--color-light-bg);
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-family: var(--font-heading);
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-bottom: 1rem;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-gray-600);
+            margin-bottom: 2.5rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 1.25rem 3rem;
+            background: var(--color-primary);
+            color: var(--color-white);
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+        
+        .cta-button:hover {
+            background: var(--color-primary-dark);
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-2px);
+        }
+        
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--color-white);
+            padding: 3rem 0;
+            border-top: 1px solid var(--color-gray-200);
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 1.5rem;
+        }
+        
+        .stat-value {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            display: block;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-description {
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .nav-container {
+                height: 70px;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                max-width: 320px;
+                height: 100vh;
+                background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 100px 30px 40px;
+                gap: 8px;
+                box-shadow: 10px 0 40px rgba(0, 0, 0, 0.15);
+                transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links li a {
+                display: block;
+                padding: 16px 20px;
+                font-size: 16px;
+                border-radius: 12px;
+                text-align: left;
+            }
+
+            .nav-links li a:hover {
+                transform: translateX(8px);
+            }
+
+            .contact-btn {
+                margin-top: 20px;
+                text-align: center !important;
+            }
+
+            .logo-text {
+                font-size: 24px;
+            }
+
+            .logo-icon {
+                width: 42px;
+                height: 42px;
+            }
+            
+            .leadership-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: row !important;
+            }
+            
+            .timeline-content {
+                margin-left: 4rem;
+                margin-right: 0;
+            }
+            
+            .timeline-marker {
+                left: 30px !important;
+            }
+            
+            .industries-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav {
+                padding: 0 15px;
+            }
+
+            .logo-text {
+                font-size: 20px;
+            }
+
+            .logo-icon {
+                width: 38px;
+                height: 38px;
+            }
+
+            .nav-links {
+                max-width: 100%;
+                padding: 90px 20px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Navbar -->
+    <nav class="nav">
+        <div class="nav-container">
+            <!-- Logo -->
+            <a href="/index.html" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    </svg>
+                </div>
+                <span class="logo-text">DIPS</span>
+            </a>
+
+            <!-- Navigation Links -->
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="active">A propos</a></li>
+                <li><a href="water.html">Water</a></li>
+                <li><a href="/chema.html">Chimicals</a></li>
+                <li><a href="/dijital.html">Digital</a></li>
+                <li><a href="/acadym.html">Academy</a></li>
+                <li><a href="#contact" class="contact-btn">Contact</a></li>
+            </ul>
+
+            <!-- Hamburger Menu -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="hero-tag">À propos de DIPS</span>
+                <h1 class="hero-title">Derrière chaque algorithme, il y a une vision industrielle</h1>
+                <p class="hero-subtitle">DIPS est née pour connecter l'ingénierie terrain à l'intelligence artificielle, au service de l'industrie du futur.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-value">10+</span>
+                    <span class="stat-description">Experts métiers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">5</span>
+                    <span class="stat-description">Industries servies</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">2025</span>
+                    <span class="stat-description">Année de fondation</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">100%</span>
+                    <span class="stat-description">Focus industriel</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section class="leadership">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">01 — Direction</span>
+                <h2 class="section-title">Une vision industrielle avant tout</h2>
+                <p class="section-description">Notre engagement : mettre l'intelligence artificielle au service des défis industriels concrets</p>
+            </div>
+            
+            <div class="leadership-content">
+                <div class="leader-image-wrapper">
+                    <div class="leader-image-container">
+                        <svg class="leader-image" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="500" fill="#f1f3f5"/>
+                            <text x="200" y="250" text-anchor="middle" font-family="Montserrat" font-size="140" font-weight="700" fill="#0052cc">OT</text>
+                        </svg>
+                    </div>
+                    <div class="leader-stats">
+                        <div class="stat-box">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Années d'expérience</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Projets industriels</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="leader-text">
+                    <blockquote class="leader-quote">
+                        L'IA n'a de valeur que lorsqu'elle respecte la réalité du terrain industriel.
+                    </blockquote>
+                    <p class="leader-bio">
+                        DIPS est dirigée par des ingénieurs et experts data convaincus que l'intelligence artificielle doit servir l'industrie avec humilité et précision. Notre rôle est d'aider les usines à décider mieux, plus tôt et plus sereinement.
+                    </p>
+                    <p class="leader-bio">
+                        Nous ne vendons pas de la technologie pour la technologie. Nous résolvons des problèmes industriels concrets avec les outils les plus avancés, toujours ancrés dans la réalité opérationnelle de nos clients.
+                    </p>
+                    <div class="leader-signature">
+                        <div class="signature-line">
+                            <div class="signature-name">Omar Tazi</div>
+                            <div class="signature-title">Directeur Général & Fondateur</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section class="industries">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">02 — Expertise</span>
+                <h2 class="section-title">Des solutions adaptées aux réalités industrielles</h2>
+                <p class="section-description">Chaque industrie a ses contraintes spécifiques. Notre IA s'y adapte avec précision.</p>
+            </div>
+            
+            <div class="industries-grid">
+                <div class="industry-card">
+                    <div class="industry-icon">⚗️</div>
+                    <h3 class="industry-name">Chimie & Pétrochimie</h3>
+                    <p class="industry-description">Optimisation des procédés complexes, prédiction de défaillances critiques, gestion intelligente des risques SEVESO et HSE.</p>
+                </div>
+                
+                <div class="industry-card">
+                    <div class="industry-icon">⚡</div>
+                    <h3 class="industry-name">Énergie & Utilities</h3>
+                    <p class="industry-description">Maintenance prédictive des infrastructures, optimisation de la production énergétique, gestion intelligente des réseaux de distribution.</p>
+                </div>
+                
+                <div class="industry-card">
+                    <div class="industry-icon">⚙️</div>
+                    <h3 class="industry-name">Manufacturing & Process Continu</h3>
+                    <p class="industry-description">Contrôle qualité automatisé, optimisation des flux de production, réduction des temps d'arrêt non planifiés.</p>
+                </div>
+                
+                <div class="industry-card">
+                    <div class="industry-icon">🌾</div>
+                    <h3 class="industry-name">Agro-industrie</h3>
+                    <p class="industry-description">Traçabilité complète de la chaîne, optimisation des ressources (eau, énergie), conformité réglementaire et sanitaire.</p>
+                </div>
+                
+                <div class="industry-card">
+                    <div class="industry-icon">🔒</div>
+                    <h3 class="industry-name">Environnements Complexes & Critiques</h3>
+                    <p class="industry-description">Sécurité maximale, systèmes redondants, conformité aux normes internationales les plus strictes (ISO, IEC).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">03 — Équipe</span>
+                <h2 class="section-title">Une équipe structurée, orientée terrain</h2>
+                <p class="section-description">Des profils complémentaires, une vision commune : servir l'industrie avec excellence et rigueur.</p>
+            </div>
+            
+            <div class="team-category">
+                <div class="category-header">
+                    <div class="category-icon">🤖</div>
+                    <h3 class="category-title">Data Science & Intelligence Artificielle</h3>
+                </div>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">AS</div>
+                        <div class="member-name">Dr. Ahmed Saadi</div>
+                        <div class="member-role">Lead Data Scientist<br>PhD Machine Learning</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">LM</div>
+                        <div class="member-name">Laila Mansouri</div>
+                        <div class="member-role">ML Engineer<br>Deep Learning Specialist</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">KE</div>
+                        <div class="member-name">Karim El Amrani</div>
+                        <div class="member-role">AI Research Engineer<br>Computer Vision</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-category">
+                <div class="category-header">
+                    <div class="category-icon">🏭</div>
+                    <h3 class="category-title">Ingénierie Industrielle & Procédés</h3>
+                </div>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">YB</div>
+                        <div class="member-name">Youssef Benali</div>
+                        <div class="member-role">Ingénieur Process Senior<br>15 ans industrie chimique</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">SZ</div>
+                        <div class="member-name">Salma Zahra</div>
+                        <div class="member-role">Ingénieure Systèmes<br>Automatisation & SCADA</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">MH</div>
+                        <div class="member-name">Mehdi Hamza</div>
+                        <div class="member-role">Expert Maintenance<br>Fiabilité industrielle</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-category">
+                <div class="category-header">
+                    <div class="category-icon">🚀</div>
+                    <h3 class="category-title">Déploiement & Opérations</h3>
+                </div>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">RF</div>
+                        <div class="member-name">Rachid Fahmi</div>
+                        <div class="member-role">DevOps Lead<br>Cloud & Infrastructure</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">NK</div>
+                        <div class="member-name">Nadia Khalil</div>
+                        <div class="member-role">Integration Specialist<br>Systèmes industriels</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-category">
+                <div class="category-header">
+                    <div class="category-icon">📊</div>
+                    <h3 class="category-title">Stratégie & Management</h3>
+                </div>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-photo">OT</div>
+                        <div class="member-name">Omar Tazi</div>
+                        <div class="member-role">Directeur Général<br>Vision stratégique</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-photo">IC</div>
+                        <div class="member-name">Imane Cherkaoui</div>
+                        <div class="member-role">Directrice Stratégie<br>Business Development</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section class="roadmap">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">04 — Vision</span>
+                <h2 class="section-title">Une vision claire, un cap maîtrisé</h2>
+                <p class="section-description">Notre feuille de route pour construire l'usine intelligente de demain, étape par étape.</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2025</span>
+                        <ul>
+                            <li>Structuration complète des solutions IA industrielles</li>
+                            <li>Lancement des premiers projets pilotes clients</li>
+                            <li>Développement des frameworks propriétaires</li>
+                            <li>Certification qualité ISO 9001</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2026</span>
+                        <ul>
+                            <li>Déploiement multi-sites chez clients industriels</li>
+                            <li>Standardisation des frameworks IA sectoriels</li>
+                            <li>Extension des capacités prédictives avancées</li>
+                            <li>Partenariats stratégiques avec équipementiers</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2027</span>
+                        <ul>
+                            <li>Digital Twin avancé pour procédés critiques</li>
+                            <li>Copilotes opérateurs avec IA conversationnelle</li>
+                            <li>IA explicable et certifiable (XAI)</li>
+                            <li>Centre de R&D dédié à l'industrie 4.0</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <span class="timeline-year">2028</span>
+                        <ul>
+                            <li>Plateformes IA industrielles autonomes</li>
+                            <li>Expansion internationale (Europe, Afrique)</li>
+                            <li>Écosystème partenaires & intégrateurs</li>
+                            <li>Leadership régional en IA industrielle</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+            </div>
+            
+            <div class="vision-banner">
+                <p class="vision-text">Nous construisons aujourd'hui l'usine intelligente de demain</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Prêt à transformer votre industrie ?</h2>
+            <p class="cta-subtitle">Discutons de votre projet et explorons ensemble les possibilités de l'IA pour votre usine.</p>
+            <a href="#contact" class="cta-button">Contactez-nous</a>
+        </div>
+    </section>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        const overlay = document.getElementById('overlay');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Close menu on window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 992 && navLinks.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    </script>
+
+</body>
+</html>

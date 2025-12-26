@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIPS - Chemical & Fertilizer Process Excellence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --slate-950: #020617;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-600: #475569;
+            --slate-500: #64748b;
+            --slate-400: #94a3b8;
+            --slate-300: #cbd5e1;
+            --amber-700: #b45309;
+            --amber-600: #d97706;
+            --amber-500: #f59e0b;
+            --amber-400: #fbbf24;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--slate-950);
+            color: white;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--slate-900); }
+        ::-webkit-scrollbar-thumb { background: var(--slate-700); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--slate-600); }
+
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+        .gradient-text {
+            background: linear-gradient(to right, var(--amber-400), var(--amber-500), var(--amber-600));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== NAVBAR ===== */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        .overlay.active { opacity: 1; visibility: visible; }
+
+        .navbar {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            padding: 0 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(217, 119, 6, 0.2);
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover { transform: scale(1.02); }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--amber-700) 0%, var(--amber-500) 50%, var(--amber-400) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .logo-icon svg { width: 28px; height: 28px; fill: var(--slate-950); z-index: 1; }
+
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--amber-400) 0%, var(--amber-500) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--slate-300);
+            font-weight: 500;
+            font-size: 15px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links li a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--amber-500), var(--amber-400));
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links li a:hover { color: var(--amber-400); background: rgba(217, 119, 6, 0.1); }
+        .nav-links li a:hover::before { width: 60%; }
+        .nav-links li a.active { color: var(--amber-400); background: rgba(217, 119, 6, 0.15); }
+        .nav-links li a.active::before { width: 60%; }
+
+        .contact-btn {
+            background: linear-gradient(135deg, var(--amber-600) 0%, var(--amber-500) 100%);
+            color: var(--slate-950) !important;
+            padding: 12px 28px !important;
+            border-radius: 50px !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
+            transition: all 0.3s ease !important;
+        }
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(217, 119, 6, 0.5);
+            background: linear-gradient(135deg, var(--amber-500) 0%, var(--amber-400) 100%) !important;
+            color: var(--slate-950) !important;
+        }
+        .contact-btn::before { display: none !important; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
+            transition: background 0.3s ease;
+            z-index: 1001;
+        }
+        .hamburger:hover { background: rgba(217, 119, 6, 0.1); }
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--amber-500), var(--amber-400));
+            border-radius: 3px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+        @media (max-width: 992px) {
+            .navbar { padding: 0 20px; }
+            .navbar-container { height: 70px; }
+            .hamburger { display: flex; }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                max-width: 320px;
+                height: 100vh;
+                background: linear-gradient(180deg, var(--slate-900) 0%, var(--slate-950) 100%);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 100px 30px 40px;
+                gap: 8px;
+                box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5);
+                transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                overflow-y: auto;
+            }
+            .nav-links.active { left: 0; }
+            .nav-links li { width: 100%; }
+            .nav-links li a { display: block; padding: 16px 20px; font-size: 16px; border-radius: 12px; text-align: left; }
+            .nav-links li a:hover { transform: translateX(8px); }
+            .contact-btn { margin-top: 20px; text-align: center !important; }
+            .logo-text { font-size: 24px; }
+            .logo-icon { width: 42px; height: 42px; }
+        }
+
+        @media (max-width: 480px) {
+            .navbar { padding: 0 15px; }
+            .logo-text { font-size: 20px; }
+            .logo-icon { width: 38px; height: 38px; }
+            .nav-links { max-width: 100%; padding: 90px 20px 30px; }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes spin-reverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-25%); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .animate-spin { animation: spin linear infinite; }
+        .animate-spin-reverse { animation: spin-reverse linear infinite; }
+        .animate-pulse { animation: pulse ease-in-out infinite; }
+        .animate-bounce { animation: bounce 1s infinite; }
+        .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: var(--slate-950);
+            padding-top: 80px;
+        }
+
+        .molecular-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+        .molecular-bg svg { width: 100%; height: 100%; opacity: 0.2; }
+
+        .hero-gradient-1 { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--slate-950), transparent, var(--slate-950)); }
+        .hero-gradient-2 { position: absolute; inset: 0; background: linear-gradient(to right, rgba(2, 6, 23, 0.8), transparent, rgba(2, 6, 23, 0.8)); }
+        .grid-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+            background-image: linear-gradient(rgba(100, 116, 139, 0.5) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(100, 116, 139, 0.5) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .hero-content { position: relative; z-index: 10; padding: 5rem 0; }
+        .hero-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center; }
+        @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1fr 1fr; } }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgba(217, 119, 6, 0.1);
+            border: 1px solid rgba(217, 119, 6, 0.3);
+            border-radius: 9999px;
+            padding: 0.5rem 1rem;
+            margin-bottom: 2rem;
+        }
+        .badge svg { width: 1rem; height: 1rem; color: var(--amber-500); }
+        .badge span { color: var(--amber-500); font-size: 0.875rem; font-weight: 500; letter-spacing: 0.05em; }
+
+        .hero-title { font-size: 2.25rem; font-weight: 700; color: white; line-height: 1.2; margin-bottom: 1.5rem; }
+        @media (min-width: 768px) { .hero-title { font-size: 3rem; } }
+        @media (min-width: 1024px) { .hero-title { font-size: 3.75rem; } }
+        .hero-title span { display: block; margin-top: 0.5rem; }
+
+        .hero-description { color: var(--slate-400); font-size: 1.125rem; line-height: 1.75; margin-bottom: 2.5rem; max-width: 36rem; }
+        @media (min-width: 768px) { .hero-description { font-size: 1.25rem; } }
+
+        .btn-group { display: flex; flex-direction: column; gap: 1rem; }
+        @media (min-width: 640px) { .btn-group { flex-direction: row; } }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 0.25rem;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+        }
+        .btn-primary { background: linear-gradient(to right, var(--amber-600), var(--amber-500)); color: var(--slate-950); }
+        .btn-primary:hover { background: linear-gradient(to right, var(--amber-500), var(--amber-400)); box-shadow: 0 20px 40px -15px rgba(217, 119, 6, 0.3); }
+        .btn-primary:hover svg { transform: translateX(4px); }
+        .btn-primary svg { transition: transform 0.3s ease; }
+        .btn-secondary { background: transparent; border: 1px solid var(--slate-600); color: var(--slate-300); }
+        .btn-secondary:hover { border-color: rgba(217, 119, 6, 0.5); color: var(--amber-500); }
+        .btn svg { width: 1.25rem; height: 1.25rem; }
+
+        .hero-visual { display: none; position: relative; }
+        @media (min-width: 1024px) { .hero-visual { display: block; } }
+
+        .hero-visual-container { position: relative; width: 100%; aspect-ratio: 1; }
+        .visual-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+        .outer-ring { position: absolute; width: 20rem; height: 20rem; border: 1px solid rgba(51, 65, 85, 0.5); border-radius: 50%; animation: spin 30s linear infinite; }
+        .outer-ring-2 { position: absolute; width: 24rem; height: 24rem; border: 1px solid rgba(217, 119, 6, 0.2); border-radius: 50%; animation: spin-reverse 25s linear infinite; }
+        .center-element { position: relative; }
+        .center-box {
+            width: 10rem;
+            height: 10rem;
+            background: linear-gradient(to bottom right, var(--slate-800), var(--slate-900));
+            border-radius: 1rem;
+            border: 1px solid var(--slate-700);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .center-box svg { width: 4rem; height: 4rem; color: var(--amber-500); }
+        .center-glow { position: absolute; inset: -1rem; background-color: rgba(245, 158, 11, 0.1); border-radius: 1.5rem; filter: blur(24px); z-index: -1; }
+
+        .orbital-element { position: absolute; background-color: var(--slate-800); border: 1px solid rgba(217, 119, 6, 0.3); border-radius: 0.5rem; padding: 0.75rem; }
+        .orbital-element svg { width: 1.5rem; height: 1.5rem; color: var(--amber-500); }
+        .orbital-top { top: 2rem; left: 50%; transform: translateX(-50%); }
+        .orbital-bottom { bottom: 2rem; left: 50%; transform: translateX(-50%); }
+        .orbital-left { left: 2rem; top: 50%; transform: translateY(-50%); }
+        .orbital-right { right: 2rem; top: 50%; transform: translateY(-50%); }
+
+        .stats-bar { margin-top: 5rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; padding-top: 3rem; border-top: 1px solid var(--slate-800); }
+        @media (min-width: 768px) { .stats-bar { grid-template-columns: repeat(4, 1fr); } }
+        .stat-item { text-align: center; }
+        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 1.875rem; font-weight: 700; color: var(--amber-500); margin-bottom: 0.5rem; }
+        @media (min-width: 768px) { .stat-value { font-size: 2.25rem; } }
+        .stat-label { color: var(--slate-500); font-size: 0.875rem; letter-spacing: 0.05em; }
+
+        .scroll-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+        .scroll-indicator span { color: var(--slate-500); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+        .scroll-mouse { width: 1.5rem; height: 2.5rem; border: 2px solid var(--slate-600); border-radius: 9999px; display: flex; justify-content: center; padding-top: 0.5rem; }
+        .scroll-dot { width: 0.25rem; height: 0.5rem; background-color: var(--amber-500); border-radius: 9999px; animation: bounce 1s infinite; }
+
+        /* ===== SECTIONS ===== */
+        .challenges { position: relative; padding: 8rem 0; background-color: var(--slate-950); overflow: hidden; }
+        .challenges-bg { position: absolute; inset: 0; opacity: 0.3; }
+        .challenges-bg-right { position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: linear-gradient(to left, rgba(120, 53, 15, 0.1), transparent); }
+        .challenges-bg-left { position: absolute; bottom: 0; left: 0; width: 50%; height: 100%; background: linear-gradient(to right, rgba(30, 41, 59, 0.2), transparent); }
+
+        .section-header { max-width: 48rem; margin-bottom: 4rem; }
+        .section-header.centered { text-align: center; margin-left: auto; margin-right: auto; }
+        .section-tag { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--amber-500); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+        .section-tag-line { width: 2rem; height: 1px; background-color: var(--amber-500); }
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.875rem; font-weight: 700; color: white; margin-bottom: 1.5rem; }
+        @media (min-width: 768px) { .section-title { font-size: 2.25rem; } }
+        .section-title .muted { color: var(--slate-400); }
+        .section-title .highlight { color: var(--amber-500); }
+        .section-description { color: var(--slate-400); font-size: 1.125rem; }
+
+        .challenges-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 768px) { .challenges-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .glow-card { position: relative; }
+        .glow-card::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(to right, transparent, transparent, transparent); border-radius: 0.5rem; filter: blur(4px); opacity: 0; transition: all 0.5s ease; }
+        .glow-card:hover::before { opacity: 0.3; background: linear-gradient(to right, rgba(217, 119, 6, 0.5), rgba(245, 158, 11, 0.3), rgba(217, 119, 6, 0.5)); }
+        .glow-card-inner { position: relative; background-color: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); border: 1px solid rgba(51, 65, 85, 0.5); border-radius: 0.5rem; padding: 1.5rem; height: 100%; transition: all 0.3s ease; }
+        .glow-card:hover .glow-card-inner { border-color: rgba(217, 119, 6, 0.3); background-color: rgba(15, 23, 42, 0.9); }
+        .card-icon { color: var(--amber-500); margin-bottom: 1.5rem; padding: 0.75rem; background-color: rgba(245, 158, 11, 0.1); border-radius: 0.5rem; width: fit-content; }
+        .card-icon svg { width: 2rem; height: 2rem; }
+        .card-title { font-family: 'Orbitron', sans-serif; font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 1rem; }
+        .card-description { color: var(--slate-400); line-height: 1.75; margin-bottom: 1.5rem; }
+        .card-impact { display: flex; align-items: center; gap: 0.5rem; color: var(--amber-500); font-weight: 600; font-size: 0.875rem; }
+        .card-impact svg { width: 1rem; height: 1rem; }
+
+        .solutions { position: relative; padding: 8rem 0; background: linear-gradient(to bottom, var(--slate-950), var(--slate-900), var(--slate-950)); overflow: hidden; }
+        .solutions-orb-left { position: absolute; top: 50%; left: 0; width: 16rem; height: 16rem; background-color: rgba(217, 119, 6, 0.05); border-radius: 50%; filter: blur(48px); transform: translate(-50%, -50%); }
+        .solutions-orb-right { position: absolute; top: 50%; right: 0; width: 16rem; height: 16rem; background-color: rgba(71, 85, 105, 0.05); border-radius: 50%; filter: blur(48px); transform: translate(50%, -50%); }
+        .solutions-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 768px) { .solutions-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        .solution-card { position: relative; background: linear-gradient(to bottom right, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.5)); border: 1px solid rgba(51, 65, 85, 0.5); border-radius: 0.75rem; padding: 2rem; transition: all 0.5s ease; }
+        .solution-card::before { content: ''; position: absolute; inset: -1px; background: linear-gradient(to right, transparent, rgba(217, 119, 6, 0.1), transparent); border-radius: 0.75rem; opacity: 0; filter: blur(4px); transition: opacity 0.5s ease; }
+        .solution-card:hover::before { opacity: 1; }
+        .solution-card:hover { border-color: rgba(217, 119, 6, 0.3); }
+        .solution-card-content { position: relative; }
+        .solution-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; }
+        .solution-icon { padding: 0.75rem; background-color: rgba(217, 119, 6, 0.1); border: 1px solid rgba(217, 119, 6, 0.2); border-radius: 0.5rem; color: var(--amber-500); transition: background-color 0.3s ease; }
+        .solution-card:hover .solution-icon { background-color: rgba(217, 119, 6, 0.2); }
+        .solution-icon svg { width: 1.5rem; height: 1.5rem; }
+        .solution-title { font-family: 'Orbitron', sans-serif; font-size: 1.125rem; font-weight: 700; color: white; transition: color 0.3s ease; }
+        .solution-card:hover .solution-title { color: var(--amber-500); }
+        .solution-description { color: var(--slate-400); line-height: 1.75; margin-bottom: 1.5rem; }
+        .solution-features { display: flex; flex-direction: column; gap: 0.75rem; }
+        .solution-feature { display: flex; align-items: center; gap: 0.75rem; }
+        .solution-feature svg { width: 1rem; height: 1rem; color: var(--amber-500); flex-shrink: 0; }
+        .solution-feature span { color: var(--slate-300); font-size: 0.875rem; }
+        .solution-footer { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(51, 65, 85, 0.5); }
+        .solution-link { display: flex; align-items: center; gap: 0.5rem; color: var(--amber-500); font-weight: 600; font-size: 0.875rem; text-decoration: none; transition: gap 0.3s ease; }
+        .solution-link:hover { gap: 0.75rem; }
+        .solution-link svg { width: 1rem; height: 1rem; }
+
+        .digital-twin { position: relative; padding: 8rem 0; background-color: var(--slate-950); overflow: hidden; }
+        .digital-twin-bg { position: absolute; inset: 0; opacity: 0.05; background-image: radial-gradient(circle at 2px 2px, rgba(217, 119, 6, 0.5) 1px, transparent 0); background-size: 40px 40px; }
+        .digital-twin-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center; }
+        @media (min-width: 1024px) { .digital-twin-grid { grid-template-columns: 1fr 1fr; } }
+        .digital-twin-features { display: flex; flex-direction: column; gap: 1.5rem; }
+        .dt-feature { display: flex; gap: 1rem; align-items: flex-start; }
+        .dt-feature-dot { width: 0.5rem; height: 0.5rem; background-color: var(--amber-500); border-radius: 50%; margin-top: 0.5rem; flex-shrink: 0; }
+        .dt-feature-title { font-weight: 600; color: white; margin-bottom: 0.25rem; }
+        .dt-feature-desc { color: var(--slate-400); font-size: 0.875rem; }
+        .dt-visual { position: relative; }
+        .dt-visual-container { position: relative; aspect-ratio: 1; max-width: 32rem; margin: 0 auto; }
+        .dt-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+        .dt-hub { position: relative; }
+        .dt-hub-box { width: 8rem; height: 8rem; background: linear-gradient(to bottom right, var(--amber-600), var(--amber-700)); border-radius: 1rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 25px 50px -12px rgba(217, 119, 6, 0.3); }
+        .dt-hub-box svg { width: 3.5rem; height: 3.5rem; color: var(--slate-950); }
+        .dt-ring-1 { position: absolute; inset: -2rem; border: 2px solid rgba(217, 119, 6, 0.3); border-radius: 1.5rem; animation: pulse 3s ease-in-out infinite; }
+        .dt-ring-2 { position: absolute; inset: -4rem; border: 1px solid rgba(71, 85, 105, 0.3); border-radius: 50%; }
+        .dt-data-flow { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .dt-node { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+        .dt-node-top { top: 0; left: 50%; transform: translateX(-50%); }
+        .dt-node-bottom { bottom: 0; left: 50%; transform: translateX(-50%); }
+        .dt-node-left { left: 0; top: 50%; transform: translateY(-50%); }
+        .dt-node-right { right: 0; top: 50%; transform: translateY(-50%); }
+        .dt-node-icon { padding: 0.75rem; background-color: var(--slate-800); border: 1px solid var(--slate-600); border-radius: 0.5rem; color: var(--amber-500); transition: border-color 0.3s ease; }
+        .dt-node-icon:hover { border-color: rgba(217, 119, 6, 0.5); }
+        .dt-node-icon svg { width: 1.25rem; height: 1.25rem; }
+        .dt-node-label { font-size: 0.75rem; color: var(--slate-400); font-weight: 500; }
+
+        .outcomes { position: relative; padding: 8rem 0; background: linear-gradient(to bottom, var(--slate-950), var(--slate-900)); overflow: hidden; }
+        .outcomes-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 1px; background: linear-gradient(to right, transparent, rgba(217, 119, 6, 0.5), transparent); }
+        .outcomes-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        @media (min-width: 768px) { .outcomes-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .outcomes-grid { grid-template-columns: repeat(4, 1fr); } }
+        .outcome-card { position: relative; text-align: center; padding: 2rem; border-radius: 0.75rem; background-color: rgba(15, 23, 42, 0.5); border: 1px solid var(--slate-800); transition: all 0.5s ease; overflow: hidden; }
+        .outcome-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent, rgba(217, 119, 6, 0.05)); opacity: 0; transition: opacity 0.5s ease; }
+        .outcome-card:hover::before { opacity: 1; }
+        .outcome-card:hover { border-color: rgba(217, 119, 6, 0.3); }
+        .outcome-card-content { position: relative; }
+        .outcome-stat { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 700; color: var(--amber-500); margin-bottom: 1rem; }
+        .outcome-label { font-weight: 700; color: white; font-size: 1.125rem; margin-bottom: 0.75rem; }
+        .outcome-desc { color: var(--slate-400); font-size: 0.875rem; line-height: 1.75; }
+
+        .cta-bar { margin-top: 5rem; position: relative; }
+        .cta-glow { position: absolute; inset: -4px; background: linear-gradient(to right, rgba(217, 119, 6, 0.2), rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.2)); border-radius: 1rem; filter: blur(16px); }
+        .cta-content { position: relative; background-color: var(--slate-900); border: 1px solid var(--slate-700); border-radius: 1rem; padding: 2rem; }
+        @media (min-width: 768px) { .cta-content { padding: 3rem; } }
+        .cta-flex { display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 2rem; }
+        @media (min-width: 768px) { .cta-flex { flex-direction: row; } }
+        .cta-text h3 { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 0.5rem; }
+        .cta-text p { color: var(--slate-400); }
+        .cta-buttons { display: flex; flex-direction: column; gap: 1rem; }
+        @media (min-width: 640px) { .cta-buttons { flex-direction: row; } }
+        .cta-buttons .btn { white-space: nowrap; }
+
+        .footer { background-color: var(--slate-950); border-top: 1px solid var(--slate-800); padding: 3rem 0; }
+        .footer-content { text-align: center; color: var(--slate-500); font-size: 0.875rem; }
+        .footer-content a { color: var(--amber-500); text-decoration: none; }
+        .footer-content a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/index.html" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    </svg>
+                </div>
+                <span class="logo-text">DIPS</span>
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/about.html">A propos</a></li>
+                <li><a href="/Water.html">Water</a></li>
+                <li><a href="#" class="active">Chemicals</a></li>
+                <li><a href="/dijital.html">Digital</a></li>
+                <li><a href="/acadym.html">Academy</a></li>
+                <li><a href="#" class="contact-btn">Contact</a></li>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="molecular-bg">
+            <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <linearGradient id="amberGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#d97706" stop-opacity="0.8" />
+                        <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.3" />
+                    </linearGradient>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                        <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                </defs>
+                <g stroke="url(#amberGlow)" fill="none" stroke-width="1" filter="url(#glow)">
+                    <polygon points="150,200 200,170 250,200 250,260 200,290 150,260" class="animate-pulse" style="animation-duration: 4s" />
+                    <polygon points="250,200 300,170 350,200 350,260 300,290 250,260" class="animate-pulse" style="animation-duration: 5s; animation-delay: 0.5s" />
+                    <polygon points="200,290 250,260 300,290 300,350 250,380 200,350" class="animate-pulse" style="animation-duration: 4.5s; animation-delay: 1s" />
+                    <line x1="200" y1="170" x2="200" y2="100" stroke-dasharray="4,4" />
+                    <line x1="300" y1="170" x2="350" y2="100" stroke-dasharray="4,4" />
+                    <circle cx="200" cy="100" r="4" fill="#d97706" />
+                    <circle cx="350" cy="100" r="4" fill="#d97706" />
+                    <polygon points="900,150 950,120 1000,150 1000,210 950,240 900,210" class="animate-pulse" style="animation-duration: 5s" />
+                    <polygon points="1000,150 1050,120 1100,150 1100,210 1050,240 1000,210" class="animate-pulse" style="animation-duration: 4s; animation-delay: 0.8s" />
+                    <circle cx="1050" cy="500" r="50" stroke-dasharray="8,4" class="animate-spin" style="animation-duration: 20s" />
+                    <circle cx="1050" cy="500" r="35" stroke-dasharray="4,4" class="animate-spin-reverse" style="animation-duration: 15s" />
+                </g>
+            </svg>
+        </div>
+        <div class="hero-gradient-1"></div>
+        <div class="hero-gradient-2"></div>
+        <div class="grid-pattern"></div>
+
+        <div class="hero-content container">
+            <div class="hero-grid">
+                <div class="fade-in-up">
+                    <div class="badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
+                        <span>Industrial Process Intelligence</span>
+                    </div>
+                    <h1 class="hero-title font-orbitron">Chemical & Fertilizer<span class="gradient-text">Process Excellence</span></h1>
+                    <p class="hero-description">Optimizing Acid Production & Fertilizer Yields through advanced Simulation and Industrial AI</p>
+                    <div class="btn-group">
+                        <button class="btn btn-primary">Explore Solutions<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+                        <button class="btn btn-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg>View Digital Twin</button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-visual-container">
+                        <div class="visual-center">
+                            <div class="outer-ring"></div>
+                            <div class="outer-ring-2"></div>
+                            <div class="center-element">
+                                <div class="center-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 3h15"/><path d="M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3"/><path d="M6 14h12"/></svg></div>
+                                <div class="center-glow"></div>
+                            </div>
+                            <div class="orbital-element orbital-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v4"/></svg></div>
+                            <div class="orbital-element orbital-bottom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+                            <div class="orbital-element orbital-left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg></div>
+                            <div class="orbital-element orbital-right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="stats-bar">
+                <div class="stat-item"><div class="stat-value" data-count="25">0+</div><div class="stat-label">Years Experience</div></div>
+                <div class="stat-item"><div class="stat-value" data-count="150">0+</div><div class="stat-label">Plants Optimized</div></div>
+                <div class="stat-item"><div class="stat-value" data-count="98" data-suffix="%">0%</div><div class="stat-label">Uptime Achieved</div></div>
+                <div class="stat-item"><div class="stat-value" data-count="40" data-suffix="%">0%</div><div class="stat-label">Yield Improvement</div></div>
+            </div>
+        </div>
+        <div class="scroll-indicator"><span>Scroll</span><div class="scroll-mouse"><div class="scroll-dot"></div></div></div>
+    </section>
+
+    <!-- Challenges Section -->
+    <section class="challenges" id="challenges">
+        <div class="challenges-bg"><div class="challenges-bg-right"></div><div class="challenges-bg-left"></div></div>
+        <div class="container" style="position: relative;">
+            <div class="section-header">
+                <div class="section-tag"><span class="section-tag-line"></span>Industrial Challenges</div>
+                <h2 class="section-title font-orbitron">The Critical Pain Points in<span class="muted"> Chemical Process Operations</span></h2>
+                <p class="section-description">Modern chemical and fertilizer plants face mounting pressure to optimize efficiency while maintaining strict quality and safety standards.</p>
+            </div>
+            <div class="challenges-grid">
+                <div class="glow-card"><div class="glow-card-inner"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><h3 class="card-title font-orbitron">Process Instability</h3><p class="card-description">Complex continuous units face operational volatility, leading to unplanned shutdowns and inconsistent output quality across sulfuric and phosphoric acid production lines.</p><div class="card-impact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>Up to 15% production loss</div></div></div>
+                <div class="glow-card"><div class="glow-card-inner"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><h3 class="card-title font-orbitron">Yield & Raw Material Loss</h3><p class="card-description">Suboptimal process parameters result in significant raw material waste and reduced yields, directly impacting global competitiveness and profit margins.</p><div class="card-impact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>20-30% efficiency gap</div></div></div>
+                <div class="glow-card"><div class="glow-card-inner"><div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3 class="card-title font-orbitron">Stringent Quality Compliance</h3><p class="card-description">TSP, DAP, and MAP fertilizers require precise compositional control. Deviations lead to product rejection, environmental penalties, and customer dissatisfaction.</p><div class="card-impact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>€2M+ annual penalties risk</div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section class="solutions" id="solutions">
+        <div class="solutions-orb-left"></div><div class="solutions-orb-right"></div>
+        <div class="container" style="position: relative;">
+            <div class="section-header centered">
+                <div class="section-tag"><span class="section-tag-line"></span>DIPS Solutions<span class="section-tag-line"></span></div>
+                <h2 class="section-title font-orbitron">Engineered for<span class="highlight"> Process Excellence</span></h2>
+                <p class="section-description">Our comprehensive methodology combines decades of chemical engineering expertise with cutting-edge simulation and AI technologies.</p>
+            </div>
+            <div class="solutions-grid">
+                <div class="solution-card"><div class="solution-card-content"><div class="solution-header"><div class="solution-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 3h15"/><path d="M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3"/><path d="M6 14h12"/></svg></div><h3 class="solution-title font-orbitron">Sulfuric & Phosphoric Acid Optimization</h3></div><p class="solution-description">Advanced modeling and control strategies for acid production units, maximizing conversion rates while minimizing energy consumption.</p><div class="solution-features"><div class="solution-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Reaction kinetics modeling</span></div><div class="solution-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Heat recovery optimization</span></div><div class="solution-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Catalyst life extension</span></div></div><div class="solution-footer"><a href="#" class="solution-link">Learn more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a></div></div></div>
+                <div class="solution-card"><div class="solution-card-content"><div class="solution-header"><div class="solution-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg></div><h3 class="solution-title font-orbitron">Process Debottlenecking & Stability</h3></div><p class="solution-description">Systematic identification and elimination of production constraints through detailed process analysis and targeted operational improvements.</p><div class="solution-features"><div class="solution-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Capacity assessment</span></div><div class="solution-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Constraint analysis</span></div><div class="solution-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Control loop tuning</span></div></div><div class="solution-footer"><a href="#" class="solution-link">Learn more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a></div></div></div>
+                <div class="solution-card"><div class="solution-card-content"><div class="solution-header"><div class="solution-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div><h3 class="solution-title font-orbitron">Steady-state & Dynamic Simulation</h3></div><p class="solution-description">High-fidelity process models enabling scenario analysis, operator training, and optimization without risking actual plant operations.</p><div class="solution-features"><div class="solution-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Operator training systems</span></div><div class="solution-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>What-if analysis</span></div><div class="solution-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Emergency response planning</span></div></div><div class="solution-footer"><a href="#" class="solution-link">Learn more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a></div></div></div>
+                <div class="solution-card"><div class="solution-card-content"><div class="solution-header"><div class="solution-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div><h3 class="solution-title font-orbitron">Process Knowledge Management</h3></div><p class="solution-description">Systematic capture and preservation of critical process expertise, ensuring operational continuity and institutional knowledge retention.</p><div class="solution-features"><div class="solution-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Expert knowledge capture</span></div><div class="solution-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Best practices database</span></div><div class="solution-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>Decision support systems</span></div></div><div class="solution-footer"><a href="#" class="solution-link">Learn more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Digital Twin Section -->
+    <section class="digital-twin" id="digital-twin">
+        <div class="digital-twin-bg"></div>
+        <div class="container" style="position: relative;">
+            <div class="digital-twin-grid">
+                <div>
+                    <div class="section-tag"><span class="section-tag-line"></span>Decision Support</div>
+                    <h2 class="section-title font-orbitron">Process-Oriented<span class="highlight" style="display: block;">Digital Twin</span></h2>
+                    <p class="section-description" style="margin-bottom: 2rem;">Bridge the gap between real-time operational data and strategic decision-making. Our Digital Twin technology creates a living, breathing replica of your chemical processes.</p>
+                    <div class="digital-twin-features">
+                        <div class="dt-feature"><div class="dt-feature-dot"></div><div><h4 class="dt-feature-title">Real-Time Synchronization</h4><p class="dt-feature-desc">Continuous data integration from DCS, PLC, and SCADA systems</p></div></div>
+                        <div class="dt-feature"><div class="dt-feature-dot"></div><div><h4 class="dt-feature-title">Predictive Analytics</h4><p class="dt-feature-desc">AI-driven forecasting for process deviations and equipment failures</p></div></div>
+                        <div class="dt-feature"><div class="dt-feature-dot"></div><div><h4 class="dt-feature-title">Scenario Planning</h4><p class="dt-feature-desc">Test operational changes virtually before implementation</p></div></div>
+                    </div>
+                    <button class="btn btn-primary" style="margin-top: 2.5rem;">Request Demo<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+                </div>
+                <div class="dt-visual">
+                    <div class="dt-visual-container">
+                        <div class="dt-center"><div class="dt-hub"><div class="dt-hub-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg></div><div class="dt-ring-1"></div><div class="dt-ring-2"></div></div></div>
+                        <svg class="dt-data-flow" viewBox="0 0 400 400"><defs><linearGradient id="lineGradient2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#d97706" stop-opacity="0"/><stop offset="50%" stop-color="#d97706" stop-opacity="1"/><stop offset="100%" stop-color="#d97706" stop-opacity="0"/></linearGradient></defs><g stroke="url(#lineGradient2)" stroke-width="2" fill="none"><path d="M50,200 Q150,200 200,200" class="animate-pulse" style="animation-duration: 2s"/><path d="M200,50 Q200,150 200,200" class="animate-pulse" style="animation-duration: 2.5s"/><path d="M350,200 Q250,200 200,200" class="animate-pulse" style="animation-duration: 2s; animation-delay: 0.5s"/><path d="M200,350 Q200,250 200,200" class="animate-pulse" style="animation-duration: 2.5s; animation-delay: 0.5s"/></g></svg>
+                        <div class="dt-node dt-node-top"><div class="dt-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div><span class="dt-node-label">Sensors</span></div>
+                        <div class="dt-node dt-node-bottom"><div class="dt-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><span class="dt-node-label">Analytics</span></div>
+                        <div class="dt-node dt-node-left"><div class="dt-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div><span class="dt-node-label">Data Lake</span></div>
+                        <div class="dt-node dt-node-right"><div class="dt-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg></div><span class="dt-node-label">Control</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Outcomes Section -->
+    <section class="outcomes" id="outcomes">
+        <div class="outcomes-line"></div>
+        <div class="container" style="position: relative;">
+            <div class="section-header centered">
+                <div class="section-tag"><span class="section-tag-line"></span>Commercial Outcomes<span class="section-tag-line"></span></div>
+                <h2 class="section-title font-orbitron">Measurable Impact on<span class="highlight"> Your Bottom Line</span></h2>
+                <p class="section-description">Our solutions deliver tangible results that transform operational efficiency into competitive advantage.</p>
+            </div>
+            <div class="outcomes-grid">
+                <div class="outcome-card"><div class="outcome-card-content"><div class="outcome-stat">35%</div><h3 class="outcome-label">Higher Production Yields</h3><p class="outcome-desc">Maximize output from existing assets through optimized process parameters</p></div></div>
+                <div class="outcome-card"><div class="outcome-card-content"><div class="outcome-stat">25%</div><h3 class="outcome-label">Optimized Energy Balance</h3><p class="outcome-desc">Reduce energy consumption while maintaining product quality standards</p></div></div>
+                <div class="outcome-card"><div class="outcome-card-content"><div class="outcome-stat">99.2%</div><h3 class="outcome-label">Consistent Product Quality</h3><p class="outcome-desc">Meet stringent specifications for TSP, DAP, and MAP fertilizers reliably</p></div></div>
+                <div class="outcome-card"><div class="outcome-card-content"><div class="outcome-stat">100%</div><h3 class="outcome-label">Operational Readiness</h3><p class="outcome-desc">Ensure continuous operation with proactive maintenance and training</p></div></div>
+            </div>
+            <div class="cta-bar">
+                <div class="cta-glow"></div>
+                <div class="cta-content">
+                    <div class="cta-flex">
+                        <div class="cta-text"><h3 class="font-orbitron">Ready to Transform Your Operations?</h3><p>Schedule a consultation with our process engineering experts.</p></div>
+                        <div class="cta-buttons">
+                            <button class="btn btn-primary">Get Started<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+                            <button class="btn btn-secondary">Download Brochure</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer"><div class="container"><div class="footer-content"><p>&copy; 2024 <a href="#">DIPS</a>. All rights reserved. | Chemical & Fertilizer Process Excellence</p></div></div></footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        const overlay = document.getElementById('overlay');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+        document.querySelectorAll('.nav-links a').forEach(link => { link.addEventListener('click', () => { if (navLinks.classList.contains('active')) toggleMenu(); }); });
+        window.addEventListener('resize', () => { if (window.innerWidth > 992 && navLinks.classList.contains('active')) toggleMenu(); });
+
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-value');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.getAttribute('data-count'));
+                        const suffix = counter.getAttribute('data-suffix') || '+';
+                        const duration = 2000;
+                        const startTime = performance.now();
+                        function updateCounter(currentTime) {
+                            const elapsed = currentTime - startTime;
+                            const progress = Math.min(elapsed / duration, 1);
+                            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                            counter.textContent = Math.floor(easeOutQuart * target) + suffix;
+                            if (progress < 1) requestAnimationFrame(updateCounter);
+                        }
+                        requestAnimationFrame(updateCounter);
+                        observer.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.1 });
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        function setupScrollAnimations() {
+            const elements = document.querySelectorAll('.glow-card, .solution-card, .outcome-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; }, index * 100);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            elements.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(30px)'; el.style.transition = 'opacity 0.6s ease, transform 0.6s ease'; observer.observe(el); });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() { animateCounters(); setupScrollAnimations(); });
+    </script>
+</body>
+</html>
